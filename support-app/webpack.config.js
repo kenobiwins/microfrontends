@@ -27,11 +27,13 @@ module.exports = {
       name: "support_app",
       filename: "remoteEntry.js",
       exposes: {
-        "./SupportApp": "./src/SupportApp",
+        "./SupportAppRoutes": "./src/routes",
       },
+
       shared: {
         react: { singleton: true, requiredVersion: "18.2.0" },
         "react-dom": { singleton: true, requiredVersion: "18.2.0" },
+        "react-router-dom": { singleton: true, requiredVersion: "6.14.1" },
       },
     }),
     new HtmlWebpackPlugin({ template: "./public/index.html" }),

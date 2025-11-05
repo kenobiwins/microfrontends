@@ -1,12 +1,12 @@
-import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import SupportAppRoutes from "./Routes";
 
 export default function SupportApp() {
   return (
-    <div style={{ padding: 20 }}>
-      <h2>Support App (remote)</h2>
-      <p>
-        This component is served from <strong>support-app</strong>.
-      </p>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <SupportAppRoutes />
+      </Routes>
+    </BrowserRouter>
   );
 }
