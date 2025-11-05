@@ -2,27 +2,39 @@ import React from "react";
 
 const BasePathContext = React.createContext({
   basePath: "",
-  join: (p) => p,
+  join: (...p) => p.join("/"),
 });
 
-export function BasePathProvider({ basePath = "", children }) {
-  const normalized = React.useMemo(() => {
-    if (!basePath) return "";
-    return basePath.replace(/\/+$/, "");
-  }, [basePath]);
+function normalizePath(path) {
+  if (!path) {
+    return "";
+  }
+  return path.replace(/\/+$/, "");
+}
 
-  const join = React.useMemo(() => {
-    return (path = "") => {
-      const p = String(path || "");
+function normalizeSegment(seg) {
+  if (!seg) {
+    return "";
+  }
+
+  return seg.replace(/^\/+/, "");
+}
+
+export function BasePathProvider({ basePath = "", children }) {
+  const normalized = React.useMemo(() => normalizePath(basePath), [basePath]);
+
+  const join = React.useCallback(
+    (...segments) => {
+      const cleaned = segments.map((s) => normalizeSegment(String(s || "")));
+
       if (!normalized) {
-        return p.startsWith("/") ? p : `/${p}`;
+        return "/" + cleaned.filter(Boolean).join("/");
       }
-      if (p.startsWith("/")) {
-        return `${normalized}${p}`;
-      }
-      return `${normalized}/${p}`;
-    };
-  }, [normalized]);
+
+      return normalized + "/" + cleaned.filter(Boolean).join("/");
+    },
+    [normalized]
+  );
 
   const value = React.useMemo(() => ({ basePath: normalized, join }), [normalized, join]);
 

@@ -27,7 +27,7 @@ module.exports = {
       name: "support_app",
       filename: "remoteEntry.js",
       exposes: {
-        "./SupportAppRoutes": "./src/routes",
+        "./SupportAppRouting": "./src/SupportAppRouting",
       },
 
       shared: {

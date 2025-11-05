@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
-const SupportAppRoutes = React.lazy(() => import("support_app/SupportAppRoutes"));
+const SupportAppRoutes = React.lazy(() => import("support_app/SupportAppRouting"));
 
 function Home() {
   return <div className="p-4">Main app home</div>;

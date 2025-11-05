@@ -1,12 +1,11 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import SupportAppRoutes from "./Routes";
+import React from "react";
+import { BrowserRouter } from "react-router-dom";
+import SupportAppRouting from "./SupportAppRouting";
 
 export default function SupportApp() {
   return (
     <BrowserRouter>
-      <Routes>
-        <SupportAppRoutes />
-      </Routes>
+      <SupportAppRouting />
     </BrowserRouter>
   );
 }
