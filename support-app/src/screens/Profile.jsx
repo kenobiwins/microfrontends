@@ -5,7 +5,7 @@ import { useBasePath } from "../basePathContext";
 
 export default function Profile() {
   const { basePath, join } = useBasePath();
-  
+
   return (
     <div style={{ padding: 20 }}>
       <h1>Support — Profile</h1>
@@ -18,3 +18,5 @@ export default function Profile() {
     </div>
   );
 }
+
+

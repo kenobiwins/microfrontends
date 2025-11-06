@@ -11,7 +11,7 @@ module.exports = {
     headers: { "Access-Control-Allow-Origin": "*" },
   },
   output: {
-    publicPath: "auto",
+    publicPath: "http://localhost:3001/",
   },
   module: {
     rules: [
@@ -26,6 +26,9 @@ module.exports = {
     new ModuleFederationPlugin({
       name: "support_app",
       filename: "remoteEntry.js",
+      remotes: {
+        main_app: "main_app@http://localhost:3000/remoteEntry.js",
+      },
       exposes: {
         "./SupportAppRouting": "./src/SupportAppRouting",
       },
@@ -34,6 +37,8 @@ module.exports = {
         react: { singleton: true, requiredVersion: "18.2.0" },
         "react-dom": { singleton: true, requiredVersion: "18.2.0" },
         "react-router-dom": { singleton: true, requiredVersion: "6.14.1" },
+        mobx: { singleton: true },
+        "mobx-react-lite": { singleton: true },
       },
     }),
     new HtmlWebpackPlugin({ template: "./public/index.html" }),

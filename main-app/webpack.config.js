@@ -10,7 +10,8 @@ module.exports = {
     historyApiFallback: true,
   },
   output: {
-    publicPath: "auto",
+    publicPath: "/",
+    
   },
   module: {
     rules: [
@@ -21,6 +22,7 @@ module.exports = {
       },
     ],
   },
+  
   plugins: [
     new ModuleFederationPlugin({
       name: "main_app",
@@ -28,10 +30,15 @@ module.exports = {
         // key: variable used below when dynamically loading remote
         support_app: "support_app@http://localhost:3001/remoteEntry.js",
       },
+      exposes: {
+        "./store": "./src/mobx/store.js",
+      },
       shared: {
         react: { singleton: true, requiredVersion: "18.2.0" },
         "react-dom": { singleton: true, requiredVersion: "18.2.0" },
         "react-router-dom": { singleton: true, requiredVersion: "6.14.1" },
+        mobx: { singleton: true },
+        "mobx-react-lite": { singleton: true },
       },
     }),
     new HtmlWebpackPlugin({ template: "./public/index.html" }),

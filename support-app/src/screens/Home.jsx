@@ -2,6 +2,9 @@ import React from "react";
 
 import { Link } from "react-router-dom";
 import { useBasePath } from "../basePathContext";
+import Count from "../components/Count";
+
+
 
 export default function Home() {
   const { basePath, join } = useBasePath();
@@ -22,6 +25,8 @@ export default function Home() {
           </li>
         </ul>
       </nav>
+
+      <Count />
     </div>
   );
 }
